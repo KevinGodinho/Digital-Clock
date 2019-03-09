@@ -6,7 +6,9 @@ function digitalClock(){
     var day = date.getDay(); 
     var hourConvert;
     var ack;
-    var zero;
+    var zeroHour;
+    var zeroMin;
+    var zeroSec;
     
     // convert day from number to string 
     var dayArr = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -14,6 +16,17 @@ function digitalClock(){
     //convert hour from military time to standard time
     if (hours > 12){
         hourConvert = hours - 12;
+    } else {
+        hourConvert = hours;
+    }
+    
+    //place zero before hours if needed
+    if(hours < 10){
+        hourConvert = '0' + hourConvert;
+    } else if (hours > 12){
+        hourConvert = '0' + hourConvert;
+    } else {
+        hourConvert = hours;
     }
     
     //add am and pm appropriately
@@ -25,15 +38,20 @@ function digitalClock(){
     
     //place zero before minutes if needed
     if(minutes < 10){
-        zero = 0 + minutes;
+        zeroMin = '0' + minutes;
     } else {
-        zero = minutes;
+        zeroMin = minutes;
+    }
+    
+    //place zero before seconds if needed
+    if(seconds < 10){
+        zeroSec = '0' + seconds;
+    } else {
+        zeroSec = seconds;
     }
     
     
-    document.getElementById('clock').innerHTML = dayArr[day] + ' ' + hourConvert + ':' + zero + ':' + seconds + ' ' + ack;
-    
-    console.log(hours);
+    document.getElementById('clock').innerHTML = dayArr[day] + ' ' + hourConvert + ':' + zeroMin + ':' + zeroSec + ' ' + ack;
 }
 
 //document.getElementById('clock').innerHTML = digitalClock();
